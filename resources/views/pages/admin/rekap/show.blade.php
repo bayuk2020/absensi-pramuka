@@ -14,58 +14,37 @@
        </div>
        @endif
 
-       <div class="card shadow mt-5">
-         <div class="card-body">
-          
-
-<div class="text-center">
-<p><h4><b>Daftar Riwayat Absen</b></h4></p>
+       <ul class="nav">
+        <li  class="scroll-to-section p-1"><a class="btn btn-primary btn-sm" href="/rekap/{{ $rekap[0]->id }}/cetak_pdf" target="_blank"><i class="fa fa-save"></i> Simpan</a> </li>
+        <li  class="scroll-to-section p-1"><a class="btn btn-primary btn-sm" href="/rekap/{{ $rekap[0]->id }}/print_pdf" target="_blank"><i class="fa fa-print"></i> Cetak</a> </li>
+    </ul>
+    <div class="card shadow mt-5">
+      <div class="card-body">
+    <p><h4><b>Daftar Riwayat Absen</b></h4></p>
 <p>Semester Ganjil Tahun 2022</p>
-</div>
-{{-- @dd($rekap) --}}
-          <table border="0" width="100%">
-            <tr>
-              <td width="83%"></td>
-              <td>
-                <ul class="nav">
-                  {{-- <li  class="scroll-to-section p-1"><a class="btn btn-primary btn-sm" href="/rekap/{{ $rekap[0]->id }}/cetak_pdf" target="_blank"><i class="fa fa-save"></i> Simpan</a> </li>
-                  <li  class="scroll-to-section p-1"><a class="btn btn-primary btn-sm" href="/rekap/{{ $rekap[0]->id }}/print_pdf" target="_blank"><i class="fa fa-print"></i> Cetak</a> </li> --}}
-              </ul>
-              </td>
-            </tr>
-          </table>
+      </div>
+    </div>
+
+    @foreach ($items as $item)
+       <div class="card shadow mt-3">
+         <div class="card-body">
           
          <br>
           
-         
-          <?php $i=1 ?>
-          @foreach ($rekap as $item)
-          {{-- @dd($rekap) --}}
-
-          <?php 
-          
-          $items = DB::table('presensi')
-            ->join('users', 'users.id', '=', 'presensi.id_user')
-            ->select('presensi.*', 'users.nama', 'users.kelas', 'users.nta', 'users.foto')
-            ->where('presensi.id',$item->id)
-            ->get();
-          // dd($items);
-          
-          ?>
 
           <table class="table" border="0">
             <tbody>
               <tr>
                 <td width="20%">Nama</td>
-                <td>{{$items[0]->nama}}</td>
+                <td>{{$item->nama}}</td>
               </tr>
               <tr>
                 <td width="20%">Kelas</td>
-                <td>{{$items[0]->kelas}}</td>
+                <td>{{$item->kelas}}</td>
               </tr>
               <tr>
                 <td width="20%">NTA</td>
-                <td>{{$items[0]->nta}}</td>
+                <td>{{$item->nta}}</td>
               </tr>
               <tr>
                 <td>Tanggal Absen</td>
@@ -85,9 +64,9 @@
               </tr>
             </tbody>
           </table>
-          @endforeach
-         </div>
-       </div>
+        </div>
+      </div>
+      @endforeach
 
     </div>
 

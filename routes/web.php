@@ -27,7 +27,7 @@ Route::prefix('admin')
         Route::get('/', "DashboardController@index");
     });
 
-    
+
 Auth::routes();
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
@@ -100,7 +100,7 @@ Route::post('/simpanpresensi', "PresensiController@store")->name('SPresensi');
 //Admin = Data Rekap
 Route::get('/rekap', "RekapController@index");
 Route::get('/nilai', "RekapController@nilai")->name('nilai');
-Route::get('/rekap/{id}/show', "RekapController@show");
+Route::get('/rekap/{id_user}/show', "RekapController@show");
 
 
 
@@ -157,5 +157,3 @@ Route::get('/tahun/cetak_pdf', 'TahunController@cetak_pdf');
 // Route::get('/siswa/createskk', [App\Http\Controllers\Admin\SiswaController::class, 'createskk']);
 // Route::get('/siswa/creategaruda', [App\Http\Controllers\Admin\SiswaController::class, 'creategaruda']);
 // Route::get('/siswa/createkegiatan', [App\Http\Controllers\Admin\SiswaController::class, 'createkegiatan']);
-
-

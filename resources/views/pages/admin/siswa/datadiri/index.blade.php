@@ -113,7 +113,7 @@
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->nta }}</td>
                                 <td>{{ $item->kelas }}</td>
-                                <td>{{ $item->golongan['nama_golongan'] }}</td>
+                                <td>{{ $item->golongan->id_golongan }}</td>
                                 <td><a href="{{ asset('frontend/images/IMG_6959.jpeg') }}" target="_blank">
                                         <img height="70px" width="50px" src="{{ asset('foto_siswa/' .$item -> foto) }}" alt=""></a></td>                             
                                         @if(Auth::user()->roles == 'ADMIN')

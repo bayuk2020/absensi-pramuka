@@ -99,7 +99,7 @@
       @endforeach
     </table>
    </ol>
-   <ol type="B">Data </ol>
+   <ol type="B">Data Akun</ol>
    <ol type="none">
     <?php $i=1 ?>
     <table border="0" width="100%">
@@ -116,13 +116,6 @@
             <td>:</td>
             <td>{{$siswa->username}}</td>
           </tr>
-
-          <tr>
-              <td>{{$i++}}</td>
-              <td>Password</td>
-              <td>:</td>
-              <td></td>
-            </tr>
 
     </table>
     </ol>
@@ -153,7 +146,7 @@
               <br>
               Supanggih, S.Pd
               <br>
-              Nta. 1133130960500003
+              NTA. 1133130960500003
           </td>
           <td></td>
           <td>
@@ -165,7 +158,7 @@
               <br>
               {{$siswa->nama}}
               <br>
-              Nta. {{$siswa->nta}}
+              NTA. {{$siswa->nta}}
           </td>
         </tr>
       </table>

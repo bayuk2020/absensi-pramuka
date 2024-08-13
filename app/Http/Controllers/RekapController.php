@@ -26,6 +26,8 @@ class RekapController extends Controller
             ->join('users', 'users.id', '=', 'presensi.id_user')
             ->select('presensi.*', 'users.nama', 'users.kelas', 'users.nta', 'users.foto')
             ->get();
+        $items = $items->unique('nama');
+
 
         return view('pages.admin.rekap.index', [
             'rekap' => $items
@@ -104,12 +106,20 @@ class RekapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_user)
     {
+        // dd($id_user);
         // $items = Rekap::where('id_user', '=', $id)->get();
-        $rekap = DB::table('presensi')->where('id', $id)->get();
+        $rekap = DB::table('presensi')->where('id_user', $id_user)->get();
+        $items = DB::table('presensi')
+            ->join('users', 'users.id', '=', 'presensi.id_user')
+            ->select('presensi.*', 'users.nama', 'users.kelas', 'users.nta')
+            ->where('presensi.id_user', $id_user)
+            ->get();
+
 
         return view('pages.admin.rekap.show', [
+            'items' => $items,
             'rekap' => $rekap
         ]);
     }

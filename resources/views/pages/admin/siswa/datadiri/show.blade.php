@@ -42,10 +42,6 @@
           <?php $i=1 ?>
           <table class="table" border="0">
               <tr>
-                <td width="20%">No</td>
-                <td>{{$i++}}</td>
-              </tr>
-              <tr>
                 <td>Nama</td>
                 <td>{{$siswa->nama}}</td>
               </tr>
@@ -97,7 +93,7 @@
            
            <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
-                 <li class="breadcrumb-item">Data Pribadi</li>
+                 <li class="breadcrumb-item">Data Akun</li>
                </ol>
              </nav>
 
@@ -111,10 +107,6 @@
                 <td width="20%">NTA</td>
                 <td>{{$siswa->nta}}</td>
               </tr>
-              <tr>
-                  <td>Password</td>
-                  <td>{{$siswa->password}}</td>
-                </tr>
 
               <tr>
                   <td>Foto</td>
@@ -126,9 +118,11 @@
                     @endif
                   </td>
               </tr>
+              
              </table>
 
-
+             <a href="{{url('siswa/'.$siswa->id.'/edit')}}" type="submit" class="btn btn-primary ">Edit</a>
+             <a href="/siswa" type="reset" class="btn btn-danger ">Batal</a>
 
           </div>
        </div>

@@ -143,15 +143,6 @@
                   @endforeach
                 </select>
               </div>
-      
-           
-      
-              
-      
-              <button type="submit" class="btn btn-primary ">Ubah</button>
-              <button type="reset" class="btn btn-danger ">Batal</button>
-            </form>
-
       </div>
    </div>
 
@@ -176,6 +167,11 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" name="password"  value="{{old('password')}}">
+                </div>
+
+                <div class="form-group">
                     <label for="foto">Foto</label>
                     @if($item->foto)
                       <img src="{{ asset('foto_siswa/'.$siswa->foto) }}" class="img-preview img-fluid d-block mb-3 col-sm-5" alt="" style="width:20%;height:auto">
@@ -184,13 +180,15 @@
                     @endif
                     <div class="custom-file">
                       <input type="hidden" name="oldImage" value="{{ $siswa->foto }}">
-                      <input type="file" id="image" name="foto" class="custom-file-input" id="validatedCustomFile" required onchange="previewImage()">
+                      <input type="file" id="image" name="foto" class="custom-file-input" id="validatedCustomFile"  onchange="previewImage()">
                       <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                       <div class="invalid-feedback">Example invalid custom file feedback</div>
                     </div>
                   </div>
 
-
+                  <button type="submit" class="btn btn-primary ">Ubah</button>
+                  <a href="../" class="btn btn-danger ">Batal</a>
+                </form>
 
       </div>
    </div>

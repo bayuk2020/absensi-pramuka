@@ -41,7 +41,7 @@
                                 <td>{{ $item->ket }}</td>
                                 
                                 <td style="width: 135px;">
-                                    <a class="btn btn-info" href="{{url('rekap/'.$item->id.'/show')}}"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-info" href="{{url('rekap/'.$item->id_user.'/show')}}"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                             @endforeach

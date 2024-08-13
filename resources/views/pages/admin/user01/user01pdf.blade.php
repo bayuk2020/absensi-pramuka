@@ -120,9 +120,9 @@
 
          <tr>
              <td>{{$i++}}</td>
-             <td>Password</td>
+             <td>Foto</td>
              <td>:</td>
-             <td></td>
+             <td>{{ asset('foto_siswa/' .$user -> foto) }}</td>
            </tr>
 
    </table>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+
 class LoginController extends Controller
 {
     /*
@@ -59,8 +60,8 @@ class LoginController extends Controller
     public function index()
     {
         return view('auth.login');
-    }  
-      
+    }
+
     /**
      * Write code on Method
      *
@@ -70,7 +71,7 @@ class LoginController extends Controller
     {
         return view('auth.register');
     }
-      
+
     /**
      * Write code on Method
      *
@@ -80,32 +81,31 @@ class LoginController extends Controller
     {
         $request->validate([
             'username' => 'required',
-            'nta' => 'required',
             'password' => 'required',
         ]);
-   
-        $credentials = $request->only('username','nta', 'password');
+
+        $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             // return redirect()->intended('dashboard')
             //             ->withSuccess('You have Successfully loggedin');
         }
-  
+
         return redirect("login")->withSuccess('Data yang anda masukkan salah');
     }
-      
+
     /**
      * Write code on Method
      *
      * @return response()
      */
 
-    
+
     /**
      * Write code on Method
      *
      * @return response()
      */
-    
+
     /**
      * Write code on Method
      *
@@ -113,19 +113,20 @@ class LoginController extends Controller
      */
     public function create(array $data)
     {
-      return User::create([
-        'username' => $data['username'],
-        'nta' => $data['nta'],
-        'password' => Hash::make($data['password'])
-      ]);
+        return User::create([
+            'username' => $data['username'],
+            'nta' => $data['nta'],
+            'password' => Hash::make($data['password'])
+        ]);
     }
-    
+
     /**
      * Write code on Method
      *
      * @return response()
      */
-    public function logout() {
+    public function logout()
+    {
         Session::flush();
         Auth::logout();
         return Redirect('login');

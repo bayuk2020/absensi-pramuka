@@ -26,7 +26,7 @@ class SiswaDatadiriController extends Controller
      */
     public function index()
     {
-        $siswa = User::all()->where('roles' , 'USER');
+        $siswa = User::all()->where('roles', 'USER');
         $user = Auth::user()->roles;
 
 
@@ -34,7 +34,7 @@ class SiswaDatadiriController extends Controller
         //     'siswa' => $items,
         //     'user' => $user
         // ]);
-        return view('pages.admin.siswa.datadiri.index', compact('siswa' , 'user'));
+        return view('pages.admin.siswa.datadiri.index', compact('siswa', 'user'));
     }
 
     public function indexuser()
@@ -53,7 +53,7 @@ class SiswaDatadiriController extends Controller
      */
     public function create()
     {
-        $list_golongan = Golongan ::pluck('nama_golongan','id_golongan');
+        $list_golongan = Golongan::pluck('nama_golongan', 'id_golongan');
         return view('pages.admin.siswa.datadiri.create', compact('list_golongan'));
     }
 
@@ -84,8 +84,8 @@ class SiswaDatadiriController extends Controller
         ]);
 
         $foto_siswa = $request->foto;
-        $nama_file = time().'.'.$foto_siswa->getClientOriginalExtension();
-        $foto_siswa->move('foto_siswa/' , $nama_file);
+        $nama_file = time() . '.' . $foto_siswa->getClientOriginalExtension();
+        $foto_siswa->move('foto_siswa/', $nama_file);
 
         SiswaDatadiri::create([
             'nama' => $request->nama,
@@ -96,7 +96,7 @@ class SiswaDatadiriController extends Controller
             'nta' => $request->nta,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
-            'roles'=>'USER',
+            'roles' => 'USER',
             'jenis_kelamin' => $request->jenis_kelamin,
             'agama' => $request->agama,
             'alamat' => $request->alamat,
@@ -138,18 +138,17 @@ class SiswaDatadiriController extends Controller
 
     public function cetakall_pdf()
     {
-      
-        
-        $user = SiswaDatadiri::all()->where('roles' , 'USER');
+
+
+        $user = SiswaDatadiri::all()->where('roles', 'USER');
         $pdf = PDF::loadView('pages.admin.siswa.datadiri.cetakallpdf', ['user' => $user])->setpaper('A4', 'landscape');
         $output = $pdf->output();
 
         return new Response($output, 200, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' =>  'inline; filename="invoice.pdf"',
-            
-        ]);
 
+        ]);
     }
 
     public function print_pdf($id)
@@ -173,12 +172,15 @@ class SiswaDatadiriController extends Controller
     public function edit($id)
     {
         $item = SiswaDatadiri::findOrFail($id);
-        $list_golongan = Golongan::pluck('nama_golongan','id_golongan');
+        $list_golongan = Golongan::pluck('nama_golongan', 'id_golongan');
 
-        return view('pages.admin.siswa.datadiri.edit', compact('list_golongan','item'),
-        [
-            'siswa' => $item
-        ]);
+        return view(
+            'pages.admin.siswa.datadiri.edit',
+            compact('list_golongan', 'item'),
+            [
+                'siswa' => $item
+            ]
+        );
     }
 
     /**
@@ -191,6 +193,13 @@ class SiswaDatadiriController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request, $id);
+
+        if ($request['password'] != null) {
+            $this->validate($request, ['password' => 'required']);
+        } else {
+            $pw = SiswaDatadiri::where('id', '=', $id)->get('password');
+            $request['password'] = $pw;
+        }
         $this->validate($request, [
             'nta' => 'required',
             'nama' => 'required',
@@ -204,18 +213,18 @@ class SiswaDatadiriController extends Controller
             'alamat' => 'required',
             'no_tlp' => 'required',
             // 'jabatan' => 'required',
-            'foto' => 'required|image|mimes:jpeg,jpg,png | max:2000',
+            'foto' => 'image|mimes:jpeg,jpg,png | max:2000',
         ]);
 
         $foto_siswa = $request->foto;
-        $nama_file = time().'.'.$foto_siswa->getClientOriginalExtension();
-        $foto_siswa->move('foto_siswa/' , $nama_file);
+        $nama_file = time() . '.' . $foto_siswa->getClientOriginalExtension();
+        $foto_siswa->move('foto_siswa/', $nama_file);
 
         SiswaDatadiri::where('id', $id)->update([
             'nta' => $request->nta,
             'nama' => $request->nama,
             'username' => $request->username,
-            // 'password' => $request->password,
+            'password' => $request->password,
             'kelas' => $request->kelas,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
@@ -242,7 +251,6 @@ class SiswaDatadiriController extends Controller
         $item->delete();
 
         return redirect('siswa ')->with('success', 'Data Siswa Berhasil Dihapus!');
-
     }
 
     public function export_excel()

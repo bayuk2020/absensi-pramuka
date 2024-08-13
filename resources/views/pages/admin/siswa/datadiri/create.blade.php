@@ -123,8 +123,8 @@
           </div>
 
         <div class="form-group">
-          <label for="golongan">Golongan</label>
-          <select class="custom-select my-1 mr-sm-2" id="golongan" name="golongan">
+          <label for="id_golongan">Golongan</label>
+          <select class="custom-select my-1 mr-sm-2" id="id_golongan" name="id_golongan">
             <option selected>Pilih...</option>
             @foreach ($list_golongan as $key => $value)
             <option value="{{ $key }}">
